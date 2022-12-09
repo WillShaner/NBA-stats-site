@@ -1,0 +1,27 @@
+.playerInfo {
+
+  h1 {
+    border: 1px solid red;
+    width: min-content;
+  }
+
+}
+
+.playerStats {
+  flex-wrap: wrap;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  &Row {
+    display: flex;
+    justify-content: space-around;
+    border-top: 1px solid black;
+
+  }
+
+  h4 {
+    width: min-content;
+    height: min-content;
+  }
+}
