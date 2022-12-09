@@ -6,12 +6,10 @@ function PlayerInformation({ id, season }) {
 
   useEffect(() => {
     const fetchStats = async () => {
-      console.log(id, season)
       fetch(`https://www.balldontlie.io/api/v1/season_averages/?season=${season}&player_ids[]=${id}`)
         .then((res) => res.json())
         .then((result) => {
           setStatistics(result.data[0]);
-          console.log(result)
 
         });
     };
