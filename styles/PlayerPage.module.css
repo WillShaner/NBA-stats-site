@@ -1,5 +1,7 @@
+.playerInfo {
+  text-align: center;
+}
 .playerInfo h1 {
-  border: 1px solid red;
   width: -webkit-min-content;
   width: -moz-min-content;
   width: min-content;
@@ -17,6 +19,7 @@
           flex-direction: column;
   -ms-flex-pack: distribute;
       justify-content: space-around;
+  border: 1px solid black;
 }
 .playerStatsRow {
   display: -webkit-box;
@@ -25,6 +28,9 @@
   -ms-flex-pack: distribute;
       justify-content: space-around;
   border-top: 1px solid black;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 .playerStats h4 {
   width: -webkit-min-content;

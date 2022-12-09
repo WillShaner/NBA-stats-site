@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button"
 import Row from 'react-bootstrap/Row'
 import PlayerListItem from '../components/PlayerListItem'
 import { useEffect, useState, useRef } from 'react'
+import SearchBar from "../components/SearchBar"
 function playerList() {
   const [pageCount, setPageCount] = useState(1)
   const [playerData, setPlayerData] = useState([])
@@ -23,25 +24,26 @@ function playerList() {
 
   const submitSearch = (e) => {
     e.preventDefault()
-
     setSearchParam(searchRef.current.value)
   }
 
   return (
-    <Container className="d-flex flex-column">
-      <form onSubmit={submitSearch}>
-        <input ref={searchRef} type='text' placeholder='search your favorite player' />
-        <Button variant='primary' type='submit'>Search</Button>
-      </form>
-      {playerData !== [] &&
-        playerData.map((x) => (
-          <PlayerListItem key={x.id} player={x} />))}
+    <Container className="d-flex flex-column h-100vh">
+      <SearchBar onsubmit={submitSearch} fieldRef={searchRef} type='text' placeholder='search for your favorite player' />
+      <div className='player-list-container'>
+        {playerData !== [] &&
+          playerData.map((x) => (
+            <PlayerListItem key={x.id} player={x} />))}
+      </div>
       <Row className="d-flex flex-row justify-content-around">
         {pageCount > 1 && <Button onClick={() => setPageCount(pageCount - 1)}>Prev Page</Button>
         }
-        <Button onClick={() => setPageCount(pageCount + 1)}>Next Page</Button>
+        {
+          pageCount <= 514 && <Button onClick={() => setPageCount(pageCount + 1)}>Next Page</Button>
+        }
+
       </Row>
-    </Container>
+    </Container >
   )
 }
 

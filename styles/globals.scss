@@ -46,4 +46,30 @@ a:hover {
 
 .btn {
   width: 25%;
+  background-color: $selective-yellow;
+  border-color: $prussian-blue;
+  color: $prussian-blue;
+
+  &:hover {
+    background-color: $prussian-blue;
+    color: $light-cornflower-blue
+  }
+}
+
+.h-100vh {
+  min-height: 500px;
+}
+
+.player-list-container {
+  min-height: 600px;
+  text-align: center;
+}
+
+.player-list-item {
+  margin: 2vw 0;
+}
+
+.search {
+  max-width: 600px;
+  align-self: center;
 }

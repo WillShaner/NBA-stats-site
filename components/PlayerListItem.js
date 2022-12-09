@@ -3,7 +3,7 @@ import Link from 'next/link'
 const PlayerListItem = ({ player }) => {
   return (
     <Link href="/players/[id]" as={`players/${player.id}`}>
-      <h6>{player.first_name} {player.last_name}</h6>
+      <h6 className="player-list-item">{player.first_name} {player.last_name}</h6>
     </Link>
   )
 }

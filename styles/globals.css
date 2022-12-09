@@ -38,4 +38,30 @@ a:hover {
 
 .btn {
   width: 25%;
+  background-color: #ffb703;
+  border-color: #023047;
+  color: #023047;
+}
+.btn:hover {
+  background-color: #023047;
+  color: #8ecae6;
+}
+
+.h-100vh {
+  min-height: 500px;
+}
+
+.player-list-container {
+  min-height: 600px;
+  text-align: center;
+}
+
+.player-list-item {
+  margin: 2vw 0;
+}
+
+.search {
+  max-width: 600px;
+  -ms-flex-item-align: center;
+      align-self: center;
 }/*# sourceMappingURL=globals.css.map */

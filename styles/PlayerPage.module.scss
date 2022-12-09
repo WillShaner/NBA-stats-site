@@ -1,10 +1,10 @@
 .playerInfo {
 
   h1 {
-    border: 1px solid red;
     width: min-content;
   }
 
+  text-align: center;
 }
 
 .playerStats {
@@ -12,11 +12,13 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  border: 1px solid black;
 
   &Row {
     display: flex;
     justify-content: space-around;
     border-top: 1px solid black;
+    align-items: center;
 
   }
 

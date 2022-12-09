@@ -13,7 +13,7 @@ function Navigation() {
         <Navbar.Collapse id="basic-navbar-nav" className='text-light pt-3 justify-content-end'>
           <Nav>
             <Nav.Item><Link className="mx-2" href='/'>Home</Link></Nav.Item>
-            <Nav.Item><Link className="mx-2" href='/player-list'>Players</Link></Nav.Item>
+            <Nav.Item><Link className="mx-2" href='/player-list'>Search</Link></Nav.Item>
           </Nav>
         </Navbar.Collapse>
       </Container>

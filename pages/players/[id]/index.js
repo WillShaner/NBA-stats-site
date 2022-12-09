@@ -1,33 +1,35 @@
 import Container from "react-bootstrap/Container";
 import styles from "../../../styles/PlayerPage.module.css"
 import { getMainColor, getSecondaryColor } from "nba-color"
-import { useState, useEffect, useRef } from "react";
-import Button from "react-bootstrap/Button";
+import { useState, useRef } from "react";
+import PlayerStats from "../../../components/PlayerStats"
+import SearchBar from "../../../components/SearchBar";
 const index = ({ player }) => {
-  const [statistics, setStatistics] = useState(undefined)
   const [season, setSeason] = useState(2022)
+  const [searchErrors, setSearchErrors] = useState()
   const yearParam = useRef()
   const { first_name, last_name, position, weight_pounds, height_feet, height_inches, team, id } = player
   const { full_name, abbreviation } = team
 
-  useEffect(() => {
-    const fetchStats = async () => {
-      fetch(`https://www.balldontlie.io/api/v1/season_averages/?season=${season}&player_ids[]=${id}`)
-        .then((res) => res.json())
-        .then((result) => {
-          setStatistics(result.data[0]);
-          console.log(result)
-
-        });
-    };
-    fetchStats();
-  }, [season, id]);
   const bgColor = getMainColor(abbreviation).hex
   const textColor = getSecondaryColor(abbreviation).hex
   const yearSubmit = (ev) => {
     ev.preventDefault()
+    setSearchErrors('')
+    const year = yearParam.current.value
+    if (!year) {
+      setSearchErrors('cannot be empty')
+    }
+    if (year < 1979) {
+      setSearchErrors('No stats before 1979')
+    }
+    if (year > 2022) {
+      setSearchErrors('We do not know the future')
+    }
+    else {
+      setSeason(yearParam.current.value)
 
-    setSeason(yearParam.current.value)
+    }
   }
   const bgStyle = {
     backgroundColor: `${bgColor}`,
@@ -43,42 +45,19 @@ const index = ({ player }) => {
       </div>
       <div className={styles.playerInfo}>
         <div className="d-flex flex-row justify-content-between">
-          <h1>{id}</h1>
         </div>
+        <h1>{season}</h1>
         <h3> Weight - {weight_pounds || 'N/A'} lbs</h3>
         <h3>Height - {height_feet ? `${height_feet}' ${height_inches}`
           : "N/A"
         }
         </h3>
-        {statistics !== undefined ? <div className={styles.playerStats}>
 
-          <div className={styles.playerStatsRow}>
-            <div className="stat text-center"><h4>Games Played<br />{statistics.games_played}</h4></div>
-            <div className="stat text-center"><h4>MPG<br />{statistics.min}</h4></div>
-          </div>
-
-          <div className={styles.playerStatsRow}>
-            <div className="stat text-center"><h4>PPG<br />{statistics.pts}</h4></div>
-            <div className="stat text-center"><h4>APG<br />{statistics.ast}</h4></div>
-            <div className="stat text-center"><h4>RPG<br />{statistics.reb}</h4></div>
-            <div className="stat text-center"><h4>STL<br />{statistics.stl}</h4></div>
-            <div className="stat text-center"><h4>BLK<br />{statistics.blk}</h4></div>
-            <div className="stat text-center"><h4>TOV<br />{statistics.turnover}</h4></div>
-          </div>
-
-
-
-
-
-
-        </div> : <h1>No stats for current season found</h1>}
+        <PlayerStats id={id} season={season} />
       </div>
-      <div style={bgStyle} className='p-3'><h3>Team - {full_name}</h3></div>
+      <div style={bgStyle} className='p-3'><h3>{full_name}</h3></div>
 
-      <form onSubmit={yearSubmit}>
-        <input type='number' required placeholder="search stats by season" ref={yearParam} />
-        <Button type="submit">Search</Button>
-      </form>
+      <SearchBar fieldRef={yearParam} onsubmit={yearSubmit} type='number' placeholder='search stats by season' errors={searchErrors} />
     </Container >
   )
 }
